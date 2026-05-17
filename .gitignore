@@ -216,3 +216,27 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Large AI/ML files
+*.pt
+*.pth
+*.h5
+*.onnx
+*.ckpt
+
+# Large datasets
+datasets/
+data/
+
+# Media files
+*.mp4
+*.zip
+*.rar
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
