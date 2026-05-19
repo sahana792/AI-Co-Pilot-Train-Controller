@@ -45,11 +45,19 @@ const VoiceAlertControl: React.FC = () => {
   const [log,     setLog]     = useState<string[]>([]);
   const [pulse,   setPulse]   = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  
+// Subscribe to mute changes from anywhere
+useEffect(() => {
+  const unsubscribe = voiceAlert.onMuteChange((m: boolean) => {
+    setMuted(m);
+  });
 
-  // Subscribe to mute changes from anywhere
-  useEffect(() => {
-    return voiceAlert.onMuteChange(m => setMuted(m));
-  }, []);
+  return () => {
+    if (typeof unsubscribe === 'function') {
+      unsubscribe();
+    }
+  };
+}, []);
 
   // Close panel when clicking outside
   useEffect(() => {
