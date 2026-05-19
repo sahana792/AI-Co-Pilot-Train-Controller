@@ -15,7 +15,7 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI(title="RailControl AI v7", version="7.0.0")
 
-@app.get("/", response_class=HTMLResponse)
+@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 async def home():
     return """
     <html>
