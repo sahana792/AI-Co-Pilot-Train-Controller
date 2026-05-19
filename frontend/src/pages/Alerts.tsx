@@ -134,9 +134,18 @@ const Alerts: React.FC = () => {
   }, [fetchAlerts, autoRefresh]);
 
   // Sync voice toggle with global mute state
-  useEffect(() => {
-    return voiceAlert.onMuteChange(muted => setVoiceOn(!muted));
-  }, []);
+// Sync voice toggle with global mute state
+useEffect(() => {
+  const unsubscribe = voiceAlert.onMuteChange((muted: boolean) => {
+    setVoiceOn(!muted);
+  });
+
+  return () => {
+    if (typeof unsubscribe === 'function') {
+      unsubscribe();
+    }
+  };
+}, []);
 
   const ack = (id: string) => setAlerts(prev => prev.filter(a => a.id !== id));
   const ackAll = () => setAlerts([]);
