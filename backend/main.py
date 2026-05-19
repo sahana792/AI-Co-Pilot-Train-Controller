@@ -11,9 +11,34 @@ from typing import Optional, List
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("railcontrol")
 
+from fastapi.responses import HTMLResponse
+
 app = FastAPI(title="RailControl AI v7", version="7.0.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True,
-                   allow_methods=["*"], allow_headers=["*"])
+
+@app.get("/", response_class=HTMLResponse)
+async def home():
+    return """
+    <html>
+        <head>
+            <title>RailControl AI</title>
+        </head>
+        <body style="font-family: Arial; text-align:center; padding-top:50px;">
+            <h1>🚆 RailControl AI v7</h1>
+            <h2>Karnataka Smart Railway System</h2>
+            <p>Backend API is running successfully.</p>
+            <p>AI-powered train monitoring and detection system.</p>
+            <a href="/docs">Open API Documentation</a>
+        </body>
+    </html>
+    """
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 # ── Optional heavy deps ───────────────────────────────────────────────────────
 try:
