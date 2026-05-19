@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import voiceAlert from '../services/voiceAlert';
 
 const S = { fontFamily:"'Share Tech Mono',monospace" };
 const Panel: React.FC<{title:string;sub:string;icon:string;children:React.ReactNode}> = ({title,sub,icon,children})=>(
