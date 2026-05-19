@@ -5,20 +5,34 @@ const BASE =
   "https://ai-co-pilot-train-controller.onrender.com";
 
 export const api = {
-  get: (path: string) =>
-    fetch(`${BASE}${path}`).then((r) => r.json()),
+  get: async (path: string) => {
+    const res = await fetch(`${BASE}${path}`);
 
-  post: (path: string, body: any) =>
-    fetch(`${BASE}${path}`, {
+    if (!res.ok) {
+      throw new Error(`API Error: ${res.status}`);
+    }
+
+    return res.json();
+  },
+
+  post: async (path: string, body: any) => {
+    const res = await fetch(`${BASE}${path}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-    }).then((r) => r.json()),
+    });
+
+    if (!res.ok) {
+      throw new Error(`API Error: ${res.status}`);
+    }
+
+    return res.json();
+  },
 };
 
-// Correct backend endpoints
+// APIs
 export const getTrains = () =>
   api.get("/api/trains");
 
