@@ -13,9 +13,6 @@ const Panel: React.FC<{title:string;sub:string;icon:string;children:React.ReactN
   </div>
 );
 
-const Card: React.FC<{children:React.ReactNode;color?:string}> = ({children,color='#0d2040'})=>(
-  <div style={{background:'#060f1e',border:`1px solid ${color}`,borderRadius:12,padding:18}}>{children}</div>
-);
 
 // ---------- Traffic Control ----------
 export const TrafficControl: React.FC = () => {
@@ -174,3 +171,5 @@ export const EmergencyOverride: React.FC = () => {
     </Panel>
   );
 };
+
+export default TrafficControl;
